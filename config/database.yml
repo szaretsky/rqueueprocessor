@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: d3unal20opb9hk
-  username: dpkacxtihmdkrc
-  password: SVuuOJig_qCPxjol_MfjA7wGQU
+  database: queues_production
+  username: queues
+  password: <%= ENV['QUEUES_DATABASE_PASSWORD'] %>

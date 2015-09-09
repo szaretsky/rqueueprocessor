@@ -33,12 +33,17 @@ while($running) do
     qp.put("1","Event #{event.dbid}/#{rand}", conn)
     sleep(0.1);
   end
-
+  connhash = {}
+  if ENV['DATABASE_URL']
+    connhash[:connstr] = ENV['DATABASE_URL']
+  else
+    connhash[:dbname] = 'queues_development'
+  end
   qp = PGQueueProcessor::PGQueueProcessor.new(
     [
       {:queueid => 1, :workers => 2, :frame => 100, :handler => f1 },
       {:queueid => 2, :workers => 3, :frame => 100, :handler => f2 }
-    ],{ :dbname => 'queues_development'})
+    ], connhash)
   qp.masterrun
 
 
