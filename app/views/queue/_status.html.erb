@@ -1,16 +1,19 @@
-<div class="queue">
-  <div class="qworkers">Workers: <%= status['workers'] %>
-    <div class="modify">
-      <% if status['workers'] > 1 %>
-        <%= link_to "-", workerschange_path( :queueid => status['queueid'], :workers => (status['workers']-1)),  :remote => true, :disable_with => '..' %>
-      <% else %>
-        <%= link_to "-", "", :disable_with => '..', :remote => true %>
-      <% end %>
-      <%= link_to "+", workerschange_path( :queueid => status['queueid'], :workers => (status['workers']+1)),  :remote => true %>
-    </div>
+<div class="row">
+  
+  <div class="col-md-1"><h5>Queue: <%= status['queueid'] %></h5></div>
+  <div class="col-md-2">Workers: <%= status['workers'] %>
+    <% if status['workers'] > 1 %>
+      <%= link_to "-", workerschange_path( :queueid => status['queueid'], :workers => (status['workers']-1)),  :remote => true, :disable_with => '..' ,:class => 'btn btn-primary btn-sm' %>
+    <% else %>
+      <%= link_to "-", "", :disable_with => '..', :remote => true , :disable_with => '..' ,:class => 'btn btn-primary btn-sm' %>
+    <% end %>
+    <%= link_to "+", workerschange_path( :queueid => status['queueid'], :workers => (status['workers']+1)),  :remote => true , :disable_with => '..' ,:class => 'btn btn-primary btn-sm' %>
   </div>
-  <div class="qstatus"><%= status['status'] %></div>
-  <div class="qeps">Eps: <%= status['eps'] %></div>
-  <div class="qlen">Length: <%= status['qlen'] %></div>
+  <div class="col-md-3">
+    <div class="qstatus">Status: <%= status['status'] %> <i>(working or idle)</i></div>
+    <div class="qeps">EPS: <%= status['eps'] %> <i>(Events per second)</i></div>
+    <div class="qlen">Length: <%= status['qlen'] %> <i>(Unprocessed elements in queue)</i></div>
+  </div>
 
 </div>
+<div class="row">&nbsp;</div>
