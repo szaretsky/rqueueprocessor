@@ -1,0 +1,16 @@
+<div class="queue">
+  <div class="qworkers">Workers: <%= status['workers'] %>
+    <div class="modify">
+      <% if status['workers'] > 1 %>
+        <%= link_to "-", workerschange_path( :queueid => status['queueid'], :workers => (status['workers']-1)),  :remote => true, :disable_with => '..' %>
+      <% else %>
+        <%= link_to "-", "", :disable_with => '..', :remote => true %>
+      <% end %>
+      <%= link_to "+", workerschange_path( :queueid => status['queueid'], :workers => (status['workers']+1)),  :remote => true %>
+    </div>
+  </div>
+  <div class="qstatus"><%= status['status'] %></div>
+  <div class="qeps">Eps: <%= status['eps'] %></div>
+  <div class="qlen">Length: <%= status['qlen'] %></div>
+
+</div>
